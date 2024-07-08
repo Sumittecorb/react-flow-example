@@ -16,15 +16,12 @@ html,
 #root {
   height: 100%;
 }
-
 aside {
   background-color: #0c1e35;
 }
-
 .description {
   color: #ddd;
 }
-
 .dndflow {
   flex-direction: column;
   display: flex;
@@ -47,11 +44,10 @@ aside {
   height: auto;
   padding: 4px;
   border: 0px solid #1a192b;
-  color: #ddd;
+  color: #7d84ab;
   border-radius: 2px;
   margin-bottom: 10px;
-  font-size: 20px;
-  ;
+  font-size: 16px;;
   align-items: center;
   cursor: grab;
   font-family: sans-serif;
@@ -61,29 +57,34 @@ aside {
   font-size: 14px;
   margin-bottom: 10px;
   margin-left: 4px;
+  color: #7d84ab;
 }
-
-.SUbmenu-list {
-  transform: translateX(-20px) translateY(5px);
-  width: 110px;
-  padding-left: 20px;
-  border-radius: 10px;
-  height: 0px;
-  overflow: hidden;
-  visibility: hidden;
-  transition: 0.9s ease-in-out;
+.dndnodes:hover {
+  color: #dddddd;
 }
-
-.SUbmenu-list li a {
+.SUbmenu-list, .SUbmenu-lists {
+	transform: translateX(-20px) translateY(5px);
+	width: 110px;
+	padding-left: 20px;
+	border-radius: 10px;
+	height: 0px;
+	overflow: hidden;
+	visibility: hidden;
+	transition: 0.9s ease-in-out;
+}
+.SUbmenu-list li a, .SUbmenu-lists li a  {
   -webkit-transition: all 9s;
   transition: all 9s;
 }
 
 .dndnode .SUbmenu-list {
   height: auto;
-  visibility: visible;
+	visibility: visible;
 }
-
+.dndnodes .SUbmenu-lists {
+  height: auto;
+	visibility: visible;
+}
 /* 
 .dndflow .dndnode.inputs {
   border-color: #1feb29;
@@ -111,7 +112,9 @@ aside {
   font-family: sans-serif;
   font-size: 12px;
 }
-
+.arrow, .arrows {
+  color: #ffffff!important;
+}
 .dndnode::after {
   position: absolute;
   content: "";
@@ -122,10 +125,25 @@ aside {
   height: 5px;
   right: 10px;
   transform: rotate(-45deg);
-  top: 15px;
+  top: 13px;
+}
+.dndnode.arrow:after {
+  transform: rotate(45deg);
 }
 
-.dndnode.arrow:after {
+.dndnodes::after {
+  position: absolute;
+  content: "";
+  transition: transform 0.3s;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  width: 5px;
+  height: 5px;
+  right: 10px;
+  transform: rotate(-45deg);
+  top: 10px;
+}
+.dndnodes.arrows:after {
   transform: rotate(45deg);
 }
 

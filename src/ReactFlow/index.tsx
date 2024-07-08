@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRef, useCallback, } from "react";
+import React, { useRef, useCallback } from "react";
 import ReactFlow, {
   ReactFlowProvider,
   addEdge,
@@ -7,7 +6,6 @@ import ReactFlow, {
   useEdgesState,
   Controls,
   useReactFlow,
-  MarkerType,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
@@ -17,20 +15,19 @@ import NumberNodes from "./Nodes/NumberNode";
 import OutputNode from "./Nodes/OutputNode";
 import DefaultNode from "./Nodes/DefaultNode";
 import InputNode from "./Nodes/InputNode";
-import FloatingEdge from "../component/FlowtingEdge";
 
+// import "./index.css";
 const nodeTypes = {
   custom: Nodes,
   number: NumberNodes,
   outputs: OutputNode,
   defaults: DefaultNode,
-  inputs: InputNode,
+  inputs:  InputNode,
 };
-
 const initialNodes = [
   {
     id: "1",
-    type: "default",
+    type: "dafault",
     data: { label: "Default node" },
     position: { x: 250, y: 5 },
   },
@@ -45,12 +42,10 @@ const DnDFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { screenToFlowPosition } = useReactFlow();
 
-
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
-  const edgeTypes = {
-    floating: FloatingEdge,
-  };
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    []
+  );
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
@@ -63,6 +58,7 @@ const DnDFlow = () => {
 
       const type = event.dataTransfer.getData("application/reactflow");
 
+      // check if the dropped element is valid
       if (typeof type === "undefined" || !type) {
         return;
       }
@@ -80,17 +76,8 @@ const DnDFlow = () => {
 
       setNodes((nds) => nds.concat(newNode));
     },
-    [screenToFlowPosition, setNodes]
+    [screenToFlowPosition]
   );
-
-  const defaultEdgeOptions = {
-    style: { strokeWidth: 3, stroke: 'black' },
-    type: 'floating',
-    markerEnd: {
-      type: MarkerType.ArrowClosed,
-      color: 'black',
-    },
-  };
 
   return (
     <div className="dndflow">
@@ -110,7 +97,7 @@ const DnDFlow = () => {
           <Controls />
         </ReactFlow>
       </div>
-    </div >
+    </div>
   );
 };
 
@@ -119,5 +106,4 @@ const ReactFlows = () => (
     <DnDFlow />
   </ReactFlowProvider>
 );
-
 export default ReactFlows;
