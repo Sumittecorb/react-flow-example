@@ -11,6 +11,9 @@ function NumberNodes() {
     { id: 6, label: "vector4", type: "vector" },
   ]);
 
+  const [title, setTitle] = useState("Number");
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [inputType, setInputType] = useState("");
@@ -46,13 +49,40 @@ function NumberNodes() {
     setItems(items.filter((item) => item.id !== id));
   };
 
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleTitleClick = () => {
+    setIsEditingTitle(true);
+  };
+
+  const handleTitleBlur = () => {
+    setIsEditingTitle(false);
+  };
+
   return (
     <Fragment>
       <div className="">
         <div className="bg-numberbg inline-block rounded-lg p-0.5">
           <div className="w-52 rounded-lg bg-numbergradientbg pb-2">
             <div className="flex justify-between bg-numberlabelbg rounded-t-lg px-3 py-1 border-b border-outerborderBlue">
-              <div className="text-xs text-white">Number</div>
+              <div className="text-xs text-white">
+                {isEditingTitle ? (
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={handleTitleChange}
+                    onBlur={handleTitleBlur}
+                    className="text-black p-1 rounded"
+                    autoFocus
+                  />
+                ) : (
+                  <span onClick={handleTitleClick} className="cursor-pointer">
+                    {title}
+                  </span>
+                )}
+              </div>
               <div className="flex">
                 <div draggable className="text-8 w-fit text-white bg-numberrgb py-0.5 px-2 rounded text-center shadow-frogshadow mx-1">
                   RGB
@@ -137,12 +167,14 @@ function NumberNodes() {
               </div>
             )}
 
-            {!hideButton && <button
-              onClick={handleAddClick}
-              className="w-full text-xs text-white bg-green-500 p-1 rounded mt-2"
-            >
-              Add Item
-            </button>}
+            {!hideButton && (
+              <button
+                onClick={handleAddClick}
+                className="w-full text-xs text-white bg-green-500 p-1 rounded mt-2"
+              >
+                Add Item
+              </button>
+            )}
           </div>
         </div>
       </div>

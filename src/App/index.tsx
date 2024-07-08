@@ -1,4 +1,5 @@
-import React from 'react';
+import Flow from "../Flow";
+
 import "./App.css";
 import ReactFlows from "../ReactFlow";
 
